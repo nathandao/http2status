@@ -1,15 +1,13 @@
 package http2status
 
 import (
-	"errors"
-	"fmt"
 	"github.com/bradfitz/http2"
 	"net"
 	"net/http"
 	"strings"
 )
 
-func Http2Status(url string) (bool, *req, err) {
+func Http2Status(url string) (bool, *http.Response, error) {
 	sanitizedUrl, _ := sanitizeUrl(url)
 
 	req, _ := http.NewRequest("GET", sanitizedUrl, nil)
@@ -23,7 +21,7 @@ func Http2Status(url string) (bool, *req, err) {
 	if err != nil {
 		return false, nil, err
 	} else {
-		return true, req, nil
+		return true, res, nil
 	}
 }
 
@@ -39,13 +37,13 @@ func isZeros(p net.IP) bool {
 
 func isIPv6(ip net.IP) bool {
 	if len(ip) == net.IPv4len {
-		return false, nil
+		return false
 	}
 	if len(ip) == net.IPv6len &&
 		isZeros(ip[0:10]) &&
 		ip[10] == 0xff &&
 		ip[11] == 0xff {
-		return true, nil
+		return true
 	}
 	return false
 }

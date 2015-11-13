@@ -3,13 +3,13 @@ package main
 import (
 	"fmt"
 
-	. "github.com/nathandao/http2status"
+	. "github.com/nathandao/http2status/http2status"
 )
 
 var url = "golang.org"
 
 func main() {
-	s, req, err := Http2Status(url)
+	s, res, err := Http2Status(url)
 	if err != nil {
 		fmt.Println("Opps, error: ", err)
 	}
@@ -18,6 +18,6 @@ func main() {
 		fmt.Println("Not http2")
 	} else {
 		fmt.Println("HTTP2 detected!")
-		fmt.Println(req)
+		fmt.Println(res)
 	}
 }
