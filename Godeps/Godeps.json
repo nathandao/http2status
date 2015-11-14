@@ -1,0 +1,35 @@
+{
+	"ImportPath": "github.com/nathandao/http2status",
+	"GoVersion": "go1.5",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/asaskevich/govalidator",
+			"Comment": "v2-37-gedd46cd",
+			"Rev": "edd46cdac249b001c7b7d88c6d43993ea875e8d8"
+		},
+		{
+			"ImportPath": "github.com/bradfitz/http2",
+			"Rev": "6608b73ef18668469ee5365431dc3a106502c449"
+		},
+		{
+			"ImportPath": "github.com/gorilla/context",
+			"Rev": "1c83b3eabd45b6d76072b66b746c20815fb2872d"
+		},
+		{
+			"ImportPath": "github.com/gorilla/csrf",
+			"Comment": "v1.1-9-gd5a1c5d",
+			"Rev": "d5a1c5dea92e3707a683d05eeaadf79cd35ef2cc"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Rev": "49c024275504f0341e5a9971eb7ba7fa3dc7af40"
+		},
+		{
+			"ImportPath": "github.com/gorilla/securecookie",
+			"Rev": "e95799a481bbcc3d01c2ad5178524cb8bec9f370"
+		}
+	]
+}

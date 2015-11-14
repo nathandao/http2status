@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/asaskevich/govalidator"
-	"github.com/bradfitz/http2"
+	"github.com/nathandao/http2status/Godeps/_workspace/src/github.com/asaskevich/govalidator"
+	"github.com/nathandao/http2status/Godeps/_workspace/src/github.com/bradfitz/http2"
 )
 
 func Http2Status(url string) (bool, *http.Response, string, error) {

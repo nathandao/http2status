@@ -4,8 +4,8 @@ import (
 	"html/template"
 	"net/http"
 
-	"github.com/gorilla/csrf"
-	"github.com/gorilla/mux"
+	"github.com/nathandao/http2status/Godeps/_workspace/src/github.com/gorilla/csrf"
+	"github.com/nathandao/http2status/Godeps/_workspace/src/github.com/gorilla/mux"
 	. "github.com/nathandao/http2status/http2status"
 )
 
