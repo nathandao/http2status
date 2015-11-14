@@ -14,7 +14,7 @@ func Http2Status(url string) (bool, *http.Response, string, error) {
 	sanitizedUrl, _ := sanitizeUrl(url)
 
 	if isValidUrl := govalidator.IsURL(url); isValidUrl == false {
-		return false, nil, "18", errors.New("invalid url")
+		return false, nil, sanitizedUrl, errors.New("invalid url")
 	}
 
 	req, _ := http.NewRequest("GET", sanitizedUrl, nil)
