@@ -51,8 +51,8 @@ func main() {
 	r.HandleFunc("/", HomeHandler)
 
 	// Add csrf middleware.
-	http.ListenAndServe(":8000",
-		csrf.Protect([]byte("32-byte-long-auth-key"), csrf.Secure(false))(r))
+	http.ListenAndServe(":80",
+		csrf.Protect([]byte("32-byte-long-auth-key"))(r))
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
