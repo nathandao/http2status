@@ -1,14 +1,21 @@
 package http2status
 
 import (
-	"github.com/bradfitz/http2"
+	"errors"
 	"net"
 	"net/http"
 	"strings"
+
+	"github.com/asaskevich/govalidator"
+	"github.com/bradfitz/http2"
 )
 
-func Http2Status(url string) (bool, *http.Response, error) {
+func Http2Status(url string) (bool, *http.Response, string, error) {
 	sanitizedUrl, _ := sanitizeUrl(url)
+
+	if isValidUrl := govalidator.IsURL(url); isValidUrl == false {
+		return false, nil, "18", errors.New("invalid url")
+	}
 
 	req, _ := http.NewRequest("GET", sanitizedUrl, nil)
 
@@ -19,9 +26,13 @@ func Http2Status(url string) (bool, *http.Response, error) {
 	res, err := rt.RoundTrip(req)
 	// If not http2, transport in old http2 package will return error
 	if err != nil {
-		return false, nil, err
+		res, err = http.Get(sanitizedUrl)
+		if err != nil {
+			return false, nil, sanitizedUrl, err
+		}
+		return false, res, sanitizedUrl, nil
 	} else {
-		return true, res, nil
+		return true, res, sanitizedUrl, nil
 	}
 }
 
