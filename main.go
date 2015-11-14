@@ -3,6 +3,7 @@ package main
 import (
 	"html/template"
 	"net/http"
+	"strconv"
 
 	"github.com/nathandao/http2status/Godeps/_workspace/src/github.com/gorilla/csrf"
 	"github.com/nathandao/http2status/Godeps/_workspace/src/github.com/gorilla/mux"
@@ -45,13 +46,14 @@ var tForm = template.Must(template.New("form.tmpl").Parse(form))
 var tResult = template.Must(template.New("result.tmpl").Parse(result))
 var tHeader = template.Must(template.New("header.tmpl").Parse(header))
 var tFooter = template.Must(template.New("footer.tmpl").Parse(footer))
+var port = flag.Int("port", 8080, "port to run the web app on")
 
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", HomeHandler)
 
 	// Add csrf middleware.
-	http.ListenAndServe(":8000",
+	http.ListenAndServe(":"+strconv.Itoa(port),
 		csrf.Protect([]byte("32-byte-long-auth-key"), csrf.Secure(false))(r))
 }
 
