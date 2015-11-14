@@ -1,9 +1,10 @@
 package main
 
 import (
+	"flag"
 	"html/template"
+	"log"
 	"net/http"
-	"strconv"
 
 	"github.com/nathandao/http2status/Godeps/_workspace/src/github.com/gorilla/csrf"
 	"github.com/nathandao/http2status/Godeps/_workspace/src/github.com/gorilla/mux"
@@ -46,14 +47,19 @@ var tForm = template.Must(template.New("form.tmpl").Parse(form))
 var tResult = template.Must(template.New("result.tmpl").Parse(result))
 var tHeader = template.Must(template.New("header.tmpl").Parse(header))
 var tFooter = template.Must(template.New("footer.tmpl").Parse(footer))
-var port = flag.Int("port", 8080, "port to run the web app on")
+var port string
 
 func main() {
+	flag.StringVar(&port, "p", "8000", "port to run the server on")
+	flag.Parse()
+
 	r := mux.NewRouter()
 	r.HandleFunc("/", HomeHandler)
 
+	log.Println("Listen and serving at 127.0.0.1:" + port)
+
 	// Add csrf middleware.
-	http.ListenAndServe(":"+strconv.Itoa(port),
+	http.ListenAndServe(":"+port,
 		csrf.Protect([]byte("32-byte-long-auth-key"), csrf.Secure(false))(r))
 }
 
